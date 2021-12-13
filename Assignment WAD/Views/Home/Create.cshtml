@@ -1,0 +1,63 @@
+﻿@model Assignment_WAD.Models.StudentsLate
+@{
+    ViewBag.Title = "Create";
+}
+
+<section>
+
+    <div class="row py-4">
+        <div class="col"></div>
+        <div class="col-md-6">
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h2 class="fw-bold">Thêm Sinh Viên Đóng Phạt</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Store","Home",FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.AntiForgeryToken()
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.RollNumber, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.RollNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RollNumber, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.FullName, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Method, new { @class = "form-label" })
+                            <div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(m => m.Method, "Money", new { @class = "form-check-input", @checked = "checked", @id = "money" })
+                                    <label class="form-check-label" for="money">
+                                        Đóng Tiền
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    @Html.RadioButtonFor(m => m.Method, "Push_Up", new { @class = "form-check-input", @id = "pushup" })
+                                    <label class="form-check-label" for="pushup">
+                                        Chống Đẩy
+                                    </label>
+                                </div>
+
+                            </div>
+
+                            @Html.ValidationMessageFor(m => m.Method, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="mb-3">
+                            @Html.LabelFor(m => m.Quantily, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.Quantily, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Quantily, "", new { @class = "text-danger" })
+                        </div>
+                        <button type="submit" class="btn btn-dark">Submit</button>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="col"></div>
+    </div>
+</section>

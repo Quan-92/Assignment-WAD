@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assignment_WAD.Data;
+using Assignment_WAD.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +10,26 @@ namespace Assignment_WAD.Controllers
 {
     public class HomeController : Controller
     {
+        private MyDBContext myDBContext = new MyDBContext();
         public ActionResult Index()
         {
+            
+            return View(myDBContext.StudentsLates.ToList());
+        }
+        public ActionResult Create()
+        {
             return View();
         }
-
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Store(StudentsLate studentLate)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                myDBContext.StudentsLates.Add(studentLate);
+                myDBContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Index");
         }
     }
 }
